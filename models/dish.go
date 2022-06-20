@@ -1,9 +1,9 @@
 package models
 
 type Dish struct {
-	DishId int    `json:"dish_id"`
+	Dish_id int    `json:"dish_id"`
 	Name   string `json:"name"`
-	PreparationTime int    `json:"preparation_time"`
+	Preparation_time int    `json:"preparation_time"`
 	Complexity      int    `json:"complexity"`
-	CookingApparatus string `json:"cooking_apparatus"`
+	Cooking_apparatus string `json:"cooking_apparatus"`
 }
