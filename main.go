@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/Dunitrashuk/Kitchen/config"
-	"github.com/Dunitrashuk/Kitchen/models"
+	"github.com/Dunitrashuk/Kitchen/structs"
 	"github.com/gorilla/mux"
 )
 
