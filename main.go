@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/Dunitrashuk/Kitchen/config"
-	"github.com/Dunitrashuk/Kitchen/models"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/Dunitrashuk/Kitchen/config"
+	"github.com/Dunitrashuk/Kitchen/models"
+	"github.com/gorilla/mux"
 )
 
 func getKitchen(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +29,7 @@ func getDish(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendDishes() {
-	time.Sleep(7 * time.Second)
+	time.Sleep(10 * time.Second)
 	for i := 6; i <= 10; i++ {
 		sendDish(i)
 		time.Sleep(1 * time.Second)
@@ -47,7 +48,7 @@ func sendDish(index int) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Dish %d sent to hall. Status: %d\n", data.Dish_id ,resp.StatusCode)
+	fmt.Printf("Dish %d sent to hall. Status: %d\n", data.Dish_id, resp.StatusCode)
 }
 
 func kitchenServer() {
