@@ -4,13 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
-	"net/http"
-	"time"
-
 	"github.com/Dunitrashuk/Kitchen/config"
 	"github.com/Dunitrashuk/Kitchen/structs"
 	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+	"time"
 )
 
 func getKitchen(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +18,7 @@ func getKitchen(w http.ResponseWriter, r *http.Request) {
 }
 
 func getDish(w http.ResponseWriter, r *http.Request) {
-	var dish models.Dish
+	var dish structs.Dish
 	err := json.NewDecoder(r.Body).Decode(&dish)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -59,6 +58,6 @@ func kitchenServer() {
 }
 
 func main() {
-	go sendDishes()
+	// go sendDishes()
 	kitchenServer()
 }
