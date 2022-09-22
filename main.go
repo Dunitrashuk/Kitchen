@@ -1,15 +1,16 @@
 package main
 
 import (
-	"bytes"
+	_ "bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/Dunitrashuk/Kitchen/config"
 	"github.com/Dunitrashuk/Kitchen/structs"
+	_ "github.com/Dunitrashuk/Kitchen/structs"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"time"
+	_ "time"
 )
 
 func getKitchen(w http.ResponseWriter, r *http.Request) {
@@ -18,37 +19,37 @@ func getKitchen(w http.ResponseWriter, r *http.Request) {
 }
 
 func getDish(w http.ResponseWriter, r *http.Request) {
-	var dish structs.Dish
-	err := json.NewDecoder(r.Body).Decode(&dish)
+	var order structs.Order
+	err := json.NewDecoder(r.Body).Decode(&order)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("Dish %d received. Name: %s\n", dish.Dish_id, dish.Name)
+	fmt.Printf("Order %s received. Max_wait: %d\n", order.Order_Id, order.Max_Wait)
 }
 
-func sendDishes() {
-	time.Sleep(10 * time.Second)
-	for i := 6; i <= 10; i++ {
-		sendDish(i)
-		time.Sleep(1 * time.Second)
-	}
-}
+//func sendDishes() {
+//	time.Sleep(10 * time.Second)
+//	for i := 6; i <= 10; i++ {
+//		sendDish(i)
+//		time.Sleep(1 * time.Second)
+//	}
+//}
 
-func sendDish(index int) {
-
-	data := config.GetDish(index)
-	jsonData, errMarshall := json.Marshal(data)
-	if errMarshall != nil {
-		log.Fatal(errMarshall)
-	}
-	resp, err := http.Post("http://"+config.GetHallAddress()+"/distribution", "application/json",
-		bytes.NewBuffer(jsonData))
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Dish %d sent to hall. Status: %d\n", data.Dish_id, resp.StatusCode)
-}
+//func sendDish(index int) {
+//
+//	data := config.GetDish(index)
+//	jsonData, errMarshall := json.Marshal(data)
+//	if errMarshall != nil {
+//		log.Fatal(errMarshall)
+//	}
+//	resp, err := http.Post("http://"+config.GetHallAddress()+"/distribution", "application/json",
+//		bytes.NewBuffer(jsonData))
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	fmt.Printf("Dish %d sent to hall. Status: %d\n", data.Dish_id, resp.StatusCode)
+//}
 
 func kitchenServer() {
 	myRouter := mux.NewRouter().StrictSlash(true)
