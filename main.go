@@ -14,6 +14,7 @@ import (
 )
 
 var orderList []structs.Order
+var finishedOrders []structs.FinishedOrder
 
 func getKitchen(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Kitchen Server is Listening on port 8081")
@@ -28,6 +29,17 @@ func getOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	orderList = append(orderList, order)
+	finishedOrders = append(finishedOrders, structs.FinishedOrder{
+		Order_id:        order.Order_Id,
+		Table_id:        order.Table_Id,
+		Waiter_id:       order.Waiter_Id,
+		Items:           order.Items,
+		Priority:        order.Priority,
+		Max_wait:        order.Max_Wait,
+		Pick_up_time:    order.Pickup_Time,
+		Cooking_time: 	0,
+		Cooking_details: []structs.CookingDetails{},
+	})
 	fmt.Printf("Order %s received. Max_wait: %d\n", order.Order_Id, order.Max_Wait)
 }
 
