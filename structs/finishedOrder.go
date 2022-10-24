@@ -1,7 +1,7 @@
 package structs
 
 type FinishedOrder struct {
-	Order_id        string              `json:"order_id"`
+	Order_id        int              `json:"order_id"`
 	Table_id        int              `json:"table_id"`
 	Waiter_id       int              `json:"waiter_id"`
 	Items           []int            `json:"items"`
